@@ -13,6 +13,9 @@
 a{
     cursor: pointer;
 }
+.invisible{
+    display: none;
+}
 
 /*tittle*/
 .tittle{
@@ -57,7 +60,7 @@ a{
     color: rgb(223, 11, 11);
 }
 .nav-left li:hover{
-    opacity: 0.5;
+    opacity: 0.7;
 }
 .aqui{
     opacity: .5;
@@ -104,12 +107,12 @@ a{
         top: 0;
         left: 0;
         flex-direction: column;
-        margin-top: 310px;
+        margin-top: 50mm;
         /* background: #497E95; */
         transform: translateX(-700px);
         transition: transform 0.5s ease-in-out;
         width: 30vh;
-        opacity: .9;
+        opacity: 1;
     }
     .nav-left.show{
         transform: translateX(-20px);
