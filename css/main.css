@@ -110,13 +110,16 @@ a{
     }
 }
 @media (max-width: 550px){
+    .tittle{
+        height: 80px;
+        margin-bottom: 2vh;
+    }
     .logo{
         width: 80px;
         height: 80px;
     }
     .tittle h1{
         font-size: 1em;
-        margin-bottom: 3vh;
     }
     .icon-text{
         display: none;
