@@ -113,9 +113,13 @@ a{
         transition: transform 0.5s ease-in-out;
         width: 30vh;
         opacity: 1;
+        border-right: blue solid 2px;
     }
     .nav-left.show{
         transform: translateX(-20px);
+    }
+    .nav-left li{
+        border-bottom: #ccc solid 1px;
     }
     .nav-left li.aqui{
         background: #497E95;
@@ -132,11 +136,6 @@ a{
         width: 80px;
         height: 80px;
     }
-    .tittle h1{
-        font-size: 2em;
-    }
-}
-@media (max-width: 470px){
     .tittle h1{
         font-size: 1.7em;
     }
