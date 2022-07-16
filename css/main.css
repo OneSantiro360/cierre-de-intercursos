@@ -1,0 +1,124 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+}
+.pag{
+    width: 93%;
+    margin: auto;
+    background: #B4D1DD;
+}
+a{
+    cursor: pointer;
+}
+
+/*tittle*/
+.tittle{
+    text-align: center;
+    background: #ccc;
+    height: 100px;
+    color: #0F5796;
+    display: flex;
+    cursor: pointer;
+    text-transform: uppercase;
+    margin-bottom: 5vh;
+}
+.logo{
+    border-radius: 100%;
+    background:#fff;
+}
+.tittle-text{
+    margin: 3vh;
+}
+/*Navegation*/
+.nav-web{
+    font-size: 17px;
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    padding: 10px 0;
+    background: #497E95;
+    text-transform: uppercase;
+}
+.nav-web ul{
+    display:flex;
+}
+/*nav-left*/
+.nav-left{
+    display: flex;
+    flex: 1;
+    margin-left: 20px;
+}
+.nav-left a{
+    color: rgb(223, 11, 11);
+}
+.nav-left li:hover{
+    opacity: 0.5;
+}
+.nav-left li{
+    padding: 10px;
+    background-color: #57a7cc;
+}
+/*nav-right*/
+.nav-right li{
+    padding: 1px;
+}
+.nav-right{
+    margin-right: 5vh;
+}
+/*Menu responsive*/
+.menu-btn {
+    cursor: pointer;
+    position:absolute;
+    top: 15px;
+    left: 30px;
+    z-index: 2;
+    display: none;
+}
+@media (min-width: 881px){
+    .nav-left li{
+        margin: 0 1vh;
+        border-radius: 20%;
+    }
+}
+@media (max-width: 880px){
+    .menu-btn{
+        display: block;
+        transition: transform 0.7 ease-in-out;
+    }
+    .menu-1.show{
+        transform:rotateZ(90deg);
+    }
+    .nav-left{
+        display: block;
+        top: 0;
+        left: 0;
+        flex-direction: column;
+        margin-top: 50vh;
+        /* background: #497E95; */
+        transform: translateX(-700px);
+        transition: transform 0.5s ease-in-out;
+        width: 30vh;
+        opacity: .9;
+    }
+    .nav-left.show{
+        transform: translateX(-20px);
+    }
+}
+@media (max-width: 550px){
+    .logo{
+        width: 80px;
+        height: 80px;
+    }
+    .tittle h1{
+        font-size: 1em;
+        margin-bottom: 3vh;
+    }
+    .icon-text{
+        display: none;
+    }
+}
