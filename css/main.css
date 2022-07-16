@@ -64,11 +64,14 @@ a{
     background-color: #57a7cc;
 }
 /*nav-right*/
+.nav-right{
+    margin-right: 5vh;
+}
 .nav-right li{
     padding: 1px;
 }
-.nav-right{
-    margin-right: 5vh;
+.nav-right li.icon-text{
+    float: right;
 }
 /*Menu responsive*/
 .menu-btn {
