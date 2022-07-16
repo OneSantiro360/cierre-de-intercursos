@@ -59,6 +59,9 @@ a{
 .nav-left li:hover{
     opacity: 0.5;
 }
+.aqui{
+    opacity: .5;
+}
 .nav-left li{
     padding: 10px;
     background-color: #57a7cc;
@@ -101,7 +104,7 @@ a{
         top: 0;
         left: 0;
         flex-direction: column;
-        margin-top: 56vh;
+        margin-top: 310px;
         /* background: #497E95; */
         transform: translateX(-700px);
         transition: transform 0.5s ease-in-out;
