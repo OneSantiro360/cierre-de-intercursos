@@ -98,7 +98,7 @@ a{
         top: 0;
         left: 0;
         flex-direction: column;
-        margin-top: 50vh;
+        margin-top: 45vh;
         /* background: #497E95; */
         transform: translateX(-700px);
         transition: transform 0.5s ease-in-out;
