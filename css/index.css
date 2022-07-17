@@ -28,3 +28,13 @@ section{
 .tenis{
     background: url("./img/tenis\ de\ mesa.jpeg") no-repeat center/cover;
 }
+@media (max-width: 800px){
+    section{
+        height: 300px;
+    }
+}
+@media (max-width: 500px){
+    section{
+        height: 200px;
+    }
+}
