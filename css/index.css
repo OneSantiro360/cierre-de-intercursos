@@ -16,9 +16,15 @@ section{
     padding-bottom: 50px;
 }
 .futsal-m{
-    background: url("./img/futsal-m.jpg") no-repeat center center/cover;
+    background: url("./img/futsal-m.jpg") no-repeat center/cover;
     color: black;
 }
 .futsal-f{
-    background: url("./img/futsal-f.jpg") no-repeat center center/cover;
+    background: url("./img/futsal-f.jpg") no-repeat center/cover;
+}
+.voleibol{
+    background: url("./img/voleibol.jpeg") no-repeat center/cover;
+}
+.tenis{
+    background: url("./img/tenis\ de\ mesa.jpeg") no-repeat center/cover;
 }
