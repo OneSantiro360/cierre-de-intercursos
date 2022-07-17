@@ -101,7 +101,7 @@ a{
         transition: transform 0.7 ease-in-out;
     }
     .menu-1.show{
-        transform:rotateZ(90deg);
+        transform:rotateZ(45deg);
     }
     .nav-left{
         display: block;
