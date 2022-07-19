@@ -9,7 +9,9 @@
     background: #B4D1DD;
     font-family: 'Oswald', sans-serif;
 }
-main{
+main,
+header,
+nav{
     width: 93%;
     margin: auto;
 }
