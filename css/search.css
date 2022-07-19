@@ -10,3 +10,6 @@
     text-transform: uppercase;
     padding: 0 5mm;
 }
+.nav-right a{
+    color: rgb(223, 11, 11);
+}
