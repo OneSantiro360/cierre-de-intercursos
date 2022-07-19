@@ -1,15 +1,35 @@
 /*SEARCH*/
 .search{
     margin: 4mm 0;
+    border: solid 1px;
+    height: 45px;
+    background: #fff;
 }
 .search input{
-    width: 100%;
+    width: 90%;
     height: 40px;
-    background: #47a7cc;
-    /* color: #fff; */
+    /* background: #47a7cc; */
     text-transform: uppercase;
     padding: 0 5mm;
+    float: left;
+    border: none;
 }
 .nav-right a{
     color: rgb(223, 11, 11);
+}
+.search i{
+    cursor: pointer;
+    font-size: 2em;
+    padding: 1mm;
+    float: right;
+}
+@media(max-width: 400px){
+    .search input{
+        width: 85%;
+    }
+}
+@media(max-width: 280px){
+    .search input{
+        width: 80%;
+    }
 }
