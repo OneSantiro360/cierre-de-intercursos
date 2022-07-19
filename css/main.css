@@ -89,12 +89,14 @@ a{
 }
 /*FOOTER*/
 footer{
-    height: 80px;
+    width: 100%;
+    height: 120px;
     background: #2f3640;
     color: #616161;
     font-size: 12px;
     padding: 35px 0;
-
+    float: inline-end;
+    /* bottom: 0; */
 }
 @media (min-width: 581px){
     .aqui{
