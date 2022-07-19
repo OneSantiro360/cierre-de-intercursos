@@ -102,6 +102,11 @@ footer{
     position: absolute;
     bottom: 0;
 }
+footer h3{
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
 @media (min-width: 581px){
     .aqui{
         opacity: .7;
