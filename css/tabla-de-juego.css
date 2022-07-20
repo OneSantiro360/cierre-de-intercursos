@@ -29,3 +29,13 @@ thead{
 tr:nth-child(even){
     background-color: #ddd;
 }
+.sig{
+    background-color: green;
+    color: #fff;
+    text-transform: uppercase;
+}
+.que{
+    background-color: red;
+    color: #fff;
+    text-transform: uppercase;
+}
