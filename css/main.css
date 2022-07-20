@@ -146,7 +146,7 @@ footer h3{
         top: 0;
         left: 0;
         flex-direction: column;
-        margin-top: 50mm;
+        margin-top: 67mm;
         /* background: #497E95; */
         transform: translateX(-700px);
         transition: transform 0.5s ease-in-out;
@@ -161,7 +161,7 @@ footer h3{
         border-bottom: #ccc solid 1px;
     }
     .nav-left li.aqui{
-        background: #497E95;
+        background: #597E95;
     }
     .icon-text{
         display: none;
