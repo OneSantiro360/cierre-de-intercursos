@@ -108,8 +108,8 @@ footer h3{
     justify-content: center;
 }
 @media (min-width: 581px){
-    .aqui{
-        opacity: .7;
+    .aqui li{
+        background-color: #17a7cc;
     }
     .nav-left a:hover{
         opacity: 0.7;
