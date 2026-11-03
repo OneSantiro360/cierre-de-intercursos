@@ -81,14 +81,18 @@ a{
     color: #fff;
 }
 /*nav-right*/
-.nav-right{
+/* .nav-right{
     margin-right: 5vh;
-}
+} */
 .nav-right li{
-    padding: 1px;
+    padding: 4px;
 }
 .nav-right li.icon-text{
     float: right;
+}
+.nav-right a{
+    display: block;
+    margin-right: 5vh;
 }
 /*Menu responsive*/
 .menu-btn {
@@ -116,7 +120,7 @@ footer h3{
     align-items: center;
     justify-content: center;
 }
-@media (min-width: 581px){
+@media (min-width: 881px){
     .aqui li{
         background-color: #17a7cc;
     }
@@ -141,9 +145,12 @@ footer h3{
         transform:scale(1.2)
     }
 }
-@media (max-width: 580px){
+@media (max-width: 880px){
     .menu-btn{
         display: block;
+        transition: 0.5s;
+    }
+    .menu-1{
         transition: 0.5s;
     }
     .menu-1.show{
