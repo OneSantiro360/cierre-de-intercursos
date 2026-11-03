@@ -71,6 +71,15 @@ a{
     padding: 10px;
     background-color: #57a7cc;
 }
+/* Navegación centrar */
+.nav-tittle{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    text-align: center;
+    color: #fff;
+}
 /*nav-right*/
 .nav-right{
     margin-right: 5vh;
@@ -146,7 +155,7 @@ footer h3{
         top: 0;
         left: 0;
         flex-direction: column;
-        margin-top: 67mm;
+        margin-top: 53mm;
         /* background: #497E95; */
         transform: translateX(-700px);
         transition: transform 0.5s ease-in-out;
@@ -192,6 +201,7 @@ footer h3{
 @media (max-width: 420px){
     .tittle h1{
         font-size: 1.1em;
+    }
 }
 @media (max-width: 350px){
     .tittle h1{
