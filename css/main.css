@@ -11,12 +11,15 @@
     position: relative;
     padding-bottom: 5em;
     min-height: 100vh;
+    
 }
 main,
 header,
 nav{
     width: 93%;
     margin: auto;
+    width: 100%;
+
 }
 a{
     cursor: pointer;
@@ -42,6 +45,7 @@ a{
 }
 .tittle-text{
     margin: 3vh;
+    width: 100%;
 }
 /*Navegation*/
 .nav-web{
@@ -80,7 +84,7 @@ a{
     text-align: center;
     color: #fff;
 }
-/*nav-right*/
+/* nav-right*/
 /* .nav-right{
     margin-right: 5vh;
 } */
@@ -164,7 +168,7 @@ footer h3{
         flex-direction: column;
         margin-top: 53mm;
         /* background: #497E95; */
-        transform: translateX(-700px);
+        transform: translateX(-878px);
         transition: transform 0.5s ease-in-out;
         width: 30vh;
         opacity: 1;

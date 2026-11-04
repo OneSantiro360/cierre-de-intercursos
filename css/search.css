@@ -23,7 +23,7 @@
     padding: 1mm;
     float: right;
 }
-@media(max-width: 580px){
+@media(max-width: 880px){
     #nav-lT{
         margin-top: 65mm;
     }
