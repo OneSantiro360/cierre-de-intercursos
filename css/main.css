@@ -37,7 +37,21 @@ a{
     display: flex;
     cursor: pointer;
     text-transform: uppercase;
-    /* margin-bottom: 2em; */
+
+    position: fixed;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+main{
+    padding-top: 160px;
+}
+.nav{
+    position: fixed;
+    top: 100px;
+    left: 0;
+    width: 100%;
+    z-index: 999;
 }
 .logo{
     border-radius: 100%;
@@ -193,6 +207,12 @@ footer h3{
     }
 }
 @media (max-width: 550px){
+    main{
+        padding-top: 140px;
+    }
+    .nav{
+        top: 80px;
+    }
     .tittle{
         height: 80px;
     }
