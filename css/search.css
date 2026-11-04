@@ -14,9 +14,9 @@
     float: left;
     border: none;
 }
-.nav-right a{
+/* .nav-right a{
     color: rgb(223, 11, 11);
-}
+} */
 .search i{
     cursor: pointer;
     font-size: 2em;

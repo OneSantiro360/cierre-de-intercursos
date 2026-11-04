@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html{
+      box-sizing: inherit;
+      font-size: 62.5%;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+    }
+    main {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: rgb(4, 12, 31);
+    }
+    #titulo {
+      color: #fff;
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 3rem;
+    }
+    #usuario, #contraseña {
+      color: #fff;
+      display: block;
+      margin-bottom: 5px;
+      font-size: 1.6rem;
+      
+    }
+    #enter {
+      margin-top: 10px; 
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+    }
+
+  </style>
+</head>
+<body>
+  <header></header>
+  <main>
+    <div>
+      <h1 id="titulo">Iniciar sesión</h1>
+      <form action="">
+        <div>
+          <label for="Usuario" id="usuario">Usuario: </label>
+          <input type="text" name="usuario" id="Usuario" placeholder="Ingrese su usuario">
+        </div>
+        <div>
+          <label for="Contraseña" id="contraseña">Contraseña: </label>
+          <input type="password" name="contraseña" id="Contraseña" placeholder="Ingrese su contraseña">
+        </div>
+        <button type="submit" id="enter">Iniciar sesión</button>
+      </form>
+    </div>
+  </main>
+  <footer></footer>
+</body>
+</html>
