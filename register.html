@@ -69,6 +69,10 @@
             cursor: pointer;
         }
 
+        button:hover {
+            background: #388E3C;
+        }
+
         button:disabled {
             opacity: 0.6;
             cursor: not-allowed;
@@ -87,6 +91,13 @@
             text-align: center;
             font-size: 1.5rem;
             margin-top: 20px;
+        }
+
+        .aviso {
+            color: #b9c8df;
+            font-size: 1.3rem;
+            margin-top: -12px;
+            margin-bottom: 18px;
         }
     </style>
 </head>
@@ -119,6 +130,7 @@
                 name="userid"
                 placeholder="Ingrese su número"
                 inputmode="numeric"
+                maxlength="20"
                 autocomplete="off"
                 required
             >
@@ -143,11 +155,28 @@
                 required
             >
 
+            <label for="adminPassword">
+                Contraseña de autorización:
+            </label>
+
+            <input
+                type="password"
+                id="adminPassword"
+                name="adminPassword"
+                placeholder="Ingrese la clave de autorización"
+                autocomplete="off"
+                required
+            >
+
+            <p class="aviso">
+                Necesitas la clave de autorización para crear una cuenta.
+            </p>
+
             <button type="submit" id="btnRegistro">
                 Registrarme
             </button>
 
-            <p id="mensaje" role="alert"></p>
+            <p id="mensaje" role="alert" aria-live="polite"></p>
 
         </form>
 
@@ -171,12 +200,23 @@
         const userid = document.getElementById("userid").value.trim();
         const password = document.getElementById("password").value;
         const confirmPassword = document.getElementById("confirmPassword").value;
+        const adminPassword = document.getElementById("adminPassword").value;
 
         mensaje.textContent = "";
         mensaje.style.color = "#ff7777";
 
+        if (!/^\d{1,20}$/.test(userid)) {
+            mensaje.textContent = "Ingrese un número de identificación válido";
+            return;
+        }
+
         if (password !== confirmPassword) {
             mensaje.textContent = "Las contraseñas no coinciden";
+            return;
+        }
+
+        if (!adminPassword.trim()) {
+            mensaje.textContent = "Debe ingresar la contraseña de autorización";
             return;
         }
 
@@ -184,23 +224,30 @@
         boton.textContent = "Registrando...";
 
         try {
+
             const respuesta = await fetch("/api/register", {
                 method: "POST",
+
                 headers: {
                     "Content-Type": "application/json"
                 },
+
                 credentials: "same-origin",
+
                 body: JSON.stringify({
                     username,
                     userid,
-                    password
+                    password,
+                    adminPassword
                 })
             });
 
             const resultado = await respuesta.json();
 
             if (!respuesta.ok) {
-                throw new Error(resultado.message || "No se pudo registrar");
+                throw new Error(
+                    resultado.message || "No se pudo registrar"
+                );
             }
 
             mensaje.style.color = "#4CAF50";
@@ -213,11 +260,15 @@
             }, 1200);
 
         } catch (error) {
+
+            mensaje.style.color = "#ff7777";
             mensaje.textContent = error.message;
 
         } finally {
+
             boton.disabled = false;
             boton.textContent = "Registrarme";
+
         }
 
     });
