@@ -1,72 +1,244 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <style>
-    *{
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    html{
-      box-sizing: inherit;
-      font-size: 62.5%;
-    }
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-    }
-    main {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background-color: rgb(4, 12, 31);
-    }
-    #titulo {
-      color: #fff;
-      text-align: center;
-      margin-bottom: 20px;
-      font-size: 3rem;
-    }
-    #usuario, #contraseña {
-      color: #fff;
-      display: block;
-      margin-bottom: 5px;
-      font-size: 1.6rem;
-      
-    }
-    #enter {
-      margin-top: 10px; 
-      background-color: #4CAF50;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      cursor: pointer;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  </style>
+    <title>Iniciar sesión | Intercursos</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 62.5%;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgb(4, 12, 31);
+        }
+
+        main {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        #contenedor {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        #titulo {
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 3rem;
+        }
+
+        label {
+            display: block;
+            color: white;
+            font-size: 1.6rem;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        input:focus {
+            box-shadow: 0 0 0 2px #4CAF50;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.6rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background-color: #388E3C;
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        #mensaje {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-top: 18px;
+            color: #ff7777;
+        }
+
+        #registroLink {
+            display: block;
+            color: white;
+            text-align: center;
+            font-size: 1.5rem;
+            margin-top: 25px;
+            text-decoration: none;
+        }
+
+        #registroLink:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
+
 <body>
-  <header></header>
-  <main>
-    <div>
-      <h1 id="titulo">Iniciar sesión</h1>
-      <form action="">
-        <div>
-          <label for="Usuario" id="usuario">Usuario: </label>
-          <input type="text" name="usuario" id="Usuario" placeholder="Ingrese su usuario">
+
+    <main>
+
+        <div id="contenedor">
+
+            <h1 id="titulo">Iniciar sesión</h1>
+
+            <form id="loginForm">
+
+                <label for="userid">
+                    Número de identificación:
+                </label>
+
+                <input
+                    type="text"
+                    id="userid"
+                    name="userid"
+                    placeholder="Ingrese su número"
+                    inputmode="numeric"
+                    autocomplete="username"
+                    maxlength="20"
+                    required
+                >
+
+                <label for="password">
+                    Contraseña:
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Ingrese su contraseña"
+                    autocomplete="current-password"
+                    required
+                >
+
+                <button type="submit" id="btnLogin">
+                    Iniciar sesión
+                </button>
+
+                <p id="mensaje" role="alert" aria-live="polite"></p>
+
+            </form>
+
+            <a href="/register.html" id="registroLink">
+                ¿No tienes cuenta? Regístrate
+            </a>
+
         </div>
-        <div>
-          <label for="Contraseña" id="contraseña">Contraseña: </label>
-          <input type="password" name="contraseña" id="Contraseña" placeholder="Ingrese su contraseña">
-        </div>
-        <button type="submit" id="enter">Iniciar sesión</button>
-      </form>
-    </div>
-  </main>
-  <footer></footer>
+
+    </main>
+
+    <script>
+        const formulario = document.getElementById("loginForm");
+        const mensaje = document.getElementById("mensaje");
+        const boton = document.getElementById("btnLogin");
+
+        formulario.addEventListener("submit", async (e) => {
+
+            e.preventDefault();
+
+            const userid = document.getElementById("userid").value.trim();
+            const password = document.getElementById("password").value;
+
+            mensaje.textContent = "";
+            mensaje.style.color = "#ff7777";
+
+            // Validar identificación
+            if (!/^\d{1,20}$/.test(userid)) {
+                mensaje.textContent = "Ingrese un número de identificación válido";
+                return;
+            }
+
+            if (!password) {
+                mensaje.textContent = "Ingrese su contraseña";
+                return;
+            }
+
+            boton.disabled = true;
+            boton.textContent = "Verificando...";
+
+            try {
+
+                const respuesta = await fetch("/api/login", {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    credentials: "same-origin",
+
+                    body: JSON.stringify({
+                        userid,
+                        password
+                    })
+                });
+
+                const resultado = await respuesta.json();
+
+                if (!respuesta.ok) {
+                    throw new Error(
+                        resultado.message ||
+                        "Identificación o contraseña incorrectos"
+                    );
+                }
+
+                mensaje.style.color = "#4CAF50";
+                mensaje.textContent = "¡Inicio de sesión exitoso!";
+
+                formulario.reset();
+
+                setTimeout(() => {
+                    window.location.href = "/index.html";
+                }, 800);
+
+            } catch (error) {
+
+                mensaje.style.color = "#ff7777";
+                mensaje.textContent = error.message;
+
+            } finally {
+
+                boton.disabled = false;
+                boton.textContent = "Iniciar sesión";
+
+            }
+
+        });
+    </script>
+
 </body>
 </html>
