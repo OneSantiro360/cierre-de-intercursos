@@ -12,31 +12,18 @@ module.exports = async (req, res) => {
     try {
         const { username, userid, password } = req.body || {};
 
-        // Validar los datos
-        if (!username || !userid || !password) {
-            return res.status(400).json({
-                message: "Todos los campos son obligatorios"
-            });
-        }
-
         if (
             typeof username !== "string" ||
             typeof userid !== "string" ||
             typeof password !== "string"
         ) {
             return res.status(400).json({
-                message: "Los datos enviados no son válidos"
+                message: "Datos inválidos"
             });
         }
 
         const cleanUsername = username.trim();
         const cleanUserid = userid.trim();
-
-        if (!/^\d{1,20}$/.test(cleanUserid)) {
-            return res.status(400).json({
-                message: "El ID debe contener solamente números"
-            });
-        }
 
         if (cleanUsername.length < 3 || cleanUsername.length > 255) {
             return res.status(400).json({
@@ -44,34 +31,44 @@ module.exports = async (req, res) => {
             });
         }
 
-        if (password.length < 8 || password.length > 72) {
+        if (!/^\d{1,20}$/.test(cleanUserid)) {
             return res.status(400).json({
-                message: "La contraseña debe tener entre 8 y 72 caracteres"
+                message: "El ID debe contener solamente números"
             });
         }
 
-        // Comprobar si el ID ya existe
+        if (
+            password.length < 8 ||
+            Buffer.byteLength(password, "utf8") > 72
+        ) {
+            return res.status(400).json({
+                message: "La contraseña debe tener al menos 8 caracteres y máximo 72 bytes"
+            });
+        }
+
+        // Comprobar si el ID ya está registrado
         const [existing] = await db.execute(
-            "SELECT id FROM `Usuarios` WHERE userid = ? LIMIT 1",
+            "SELECT id FROM `usuarios` WHERE userid = ? LIMIT 1",
             [cleanUserid]
         );
 
         if (existing.length > 0) {
             return res.status(409).json({
-                message: "Este ID ya está registrado"
+                message: "Este número de usuario ya está registrado"
             });
         }
 
-        // Proteger la contraseña
+        // Crear hash seguro de la contraseña
         const hashedPassword = await bcrypt.hash(password, 12);
 
-        // Crear el usuario con rol predeterminado
+        // Todos los registros públicos comienzan como usuarios normales
         const [result] = await db.execute(
-            "INSERT INTO `Usuarios` (username, userid, `password`, role) VALUES (?, ?, ?, ?)",
+            "INSERT INTO `usuarios` (username, userid, `password`, role) VALUES (?, ?, ?, ?)",
             [cleanUsername, cleanUserid, hashedPassword, "user"]
         );
 
         return res.status(201).json({
+            success: true,
             message: "Usuario registrado correctamente",
             user: {
                 id: result.insertId,
@@ -82,11 +79,11 @@ module.exports = async (req, res) => {
         });
 
     } catch (error) {
-        console.error("Error en registro:", error);
+        console.error("Error en registro:", error.code || error.message);
 
         if (error.code === "ER_DUP_ENTRY") {
             return res.status(409).json({
-                message: "Este ID ya está registrado"
+                message: "Este número de usuario ya está registrado"
             });
         }
 
