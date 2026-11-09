@@ -10,39 +10,95 @@ module.exports = async (req, res) => {
     }
 
     try {
-        const { username, userid, password } = req.body || {};
+        const {
+            username,
+            userid,
+            password,
+            adminPassword
+        } = req.body || {};
 
+        // Validar que todos los datos sean textos
         if (
             typeof username !== "string" ||
             typeof userid !== "string" ||
-            typeof password !== "string"
+            typeof password !== "string" ||
+            typeof adminPassword !== "string"
         ) {
             return res.status(400).json({
-                message: "Datos inválidos"
+                message: "Todos los campos son obligatorios"
             });
         }
 
         const cleanUsername = username.trim();
         const cleanUserid = userid.trim();
 
-        if (cleanUsername.length < 3 || cleanUsername.length > 255) {
+        // Validar nombre
+        if (
+            cleanUsername.length < 3 ||
+            cleanUsername.length > 255
+        ) {
             return res.status(400).json({
                 message: "El nombre debe tener entre 3 y 255 caracteres"
             });
         }
 
+        // Validar identificación
         if (!/^\d{1,20}$/.test(cleanUserid)) {
             return res.status(400).json({
                 message: "El ID debe contener solamente números"
             });
         }
 
+        // Validar contraseña personal
         if (
             password.length < 8 ||
             Buffer.byteLength(password, "utf8") > 72
         ) {
             return res.status(400).json({
                 message: "La contraseña debe tener al menos 8 caracteres y máximo 72 bytes"
+            });
+        }
+
+        // Validar contraseña del administrador
+        if (
+            adminPassword.length === 0 ||
+            Buffer.byteLength(adminPassword, "utf8") > 72
+        ) {
+            return res.status(400).json({
+                message: "La contraseña de autorización no es válida"
+            });
+        }
+
+        // Buscar las contraseñas cifradas de los administradores
+        const [admins] = await db.execute(
+            "SELECT `password` FROM `usuarios` WHERE role = ?",
+            ["admin"]
+        );
+
+        if (admins.length === 0) {
+            return res.status(403).json({
+                message: "No existe un administrador autorizado"
+            });
+        }
+
+        // Comprobar la contraseña introducida contra los hashes
+        let autorizado = false;
+
+        for (const admin of admins) {
+            const coincide = await bcrypt.compare(
+                adminPassword,
+                admin.password
+            );
+
+            if (coincide) {
+                autorizado = true;
+                break;
+            }
+        }
+
+        if (!autorizado) {
+            return res.status(403).json({
+                message: "Contraseña de administrador incorrecta"
             });
         }
 
@@ -58,13 +114,21 @@ module.exports = async (req, res) => {
             });
         }
 
-        // Crear hash seguro de la contraseña
+        // Cifrar la contraseña personal del nuevo usuario
         const hashedPassword = await bcrypt.hash(password, 12);
 
-        // Todos los registros públicos comienzan como usuarios normales
+        // Crear usuario: nunca permitir que el registro público
+        // decida su propio rol.
         const [result] = await db.execute(
-            "INSERT INTO `usuarios` (username, userid, `password`, role) VALUES (?, ?, ?, ?)",
-            [cleanUsername, cleanUserid, hashedPassword, "user"]
+            `INSERT INTO usuarios
+            (username, userid, password, role)
+            VALUES (?, ?, ?, ?)`,
+            [
+                cleanUsername,
+                cleanUserid,
+                hashedPassword,
+                "user"
+            ]
         );
 
         return res.status(201).json({
@@ -79,7 +143,10 @@ module.exports = async (req, res) => {
         });
 
     } catch (error) {
-        console.error("Error en registro:", error.code || error.message);
+        console.error(
+            "Error en registro:",
+            error.code || error.message
+        );
 
         if (error.code === "ER_DUP_ENTRY") {
             return res.status(409).json({
