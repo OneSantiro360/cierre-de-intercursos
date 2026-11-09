@@ -27,7 +27,7 @@ module.exports = async (req, res) => {
 
         // Buscar usuario
         const [users] = await db.execute(
-            "SELECT id, username, userid, `password`, role FROM `Usuarios` WHERE userid = ? LIMIT 1",
+            "SELECT id, username, userid, `password`, role FROM `usuarios` WHERE userid = ? LIMIT 1",
             [userid.trim()]
         );
 
