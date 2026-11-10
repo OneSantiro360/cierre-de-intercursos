@@ -89,6 +89,12 @@ main{
     padding: 10px;
     background-color: #57a7cc;
 }
+.nav-left .user-menu-name{
+    color: #fff;
+    background-color: #365f72;
+    font-weight: bold;
+    white-space: nowrap;
+}
 /* Navegación centrar */
 .nav-tittle{
     position: absolute;
