@@ -57,4 +57,4 @@ async function cargarSesion() {
     }
 }
 
-await cargarSesion();
+cargarSesion();
