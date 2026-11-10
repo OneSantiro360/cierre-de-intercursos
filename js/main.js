@@ -4,7 +4,7 @@ const mobileMenus = document.querySelectorAll(".nav-left");
 function crearIconoSesion() {
     const icono = document.createElement("i");
 
-    icono.className = "fa-solid fa-user-check";
+    icono.className = "fa-solid fa-circle-user";
     icono.setAttribute("aria-hidden", "true");
 
     return icono;
