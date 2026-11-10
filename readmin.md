@@ -2,13 +2,15 @@
 
 Este archivo explica, con palabras sencillas, qué hace cada función importante del proyecto y en qué archivo se encuentra.
 
+Las referencias con formato `archivo:línea` indican dónde comienza y termina cada función. Por ejemplo, `js/main.js:4-11` significa que hay que abrir `js/main.js` y revisar desde la línea 4 hasta la línea 11.
+
 ## JavaScript del navegador
 
 Estos archivos se ejecutan en el navegador de la persona que visita la página.
 
 ### `js/login.js`
 
-#### Evento `submit` del formulario `loginForm`
+#### Evento `submit` del formulario `loginForm` — `js/login.js:5-76`
 
 Este código se ejecuta cuando se envía el formulario de inicio de sesión.
 
@@ -32,7 +34,7 @@ formulario.addEventListener("submit", async (e) => {
 
 ### `js/register.js`
 
-#### Evento `submit` del formulario `registroForm`
+#### Evento `submit` del formulario `registroForm` — `js/register.js:5-84`
 
 Este código se ejecuta cuando se envía el formulario de registro.
 
@@ -48,7 +50,7 @@ Hace lo siguiente:
 
 ### `js/main.js`
 
-#### `crearIconoSesion()`
+#### `crearIconoSesion()` — `js/main.js:4-11`
 
 Crea el ícono que se muestra cuando una persona inició sesión.
 
@@ -60,7 +62,7 @@ fa-solid fa-circle-user
 
 Devuelve un elemento HTML `<i>` listo para mostrar en la página.
 
-#### `cerrarSesion(boton)`
+#### `cerrarSesion(boton)` — `js/main.js:13-33`
 
 Cierra la sesión de la persona.
 
@@ -73,7 +75,7 @@ Hace lo siguiente:
 
 Si ocurre un error, vuelve a activar el botón y muestra el error en la consola.
 
-#### `crearMenuSesion(usuario, enlace)`
+#### `crearMenuSesion(usuario, enlace)` — `js/main.js:35-76`
 
 Crea el menú que aparece al hacer clic en el ícono del usuario.
 
@@ -84,7 +86,7 @@ El menú contiene:
 
 También se encarga de abrir y cerrar el menú cuando se hace clic en el ícono o fuera del menú.
 
-#### `actualizarMenuSesion(usuario)`
+#### `actualizarMenuSesion(usuario)` — `js/main.js:78-97`
 
 Actualiza la navegación cuando existe una sesión iniciada.
 
@@ -100,7 +102,7 @@ Utiliza los elementos que tienen estas clases:
 .user-menu-name
 ```
 
-#### `cargarSesion()`
+#### `cargarSesion()` — `js/main.js:99-117`
 
 Consulta al servidor para saber si existe una sesión iniciada.
 
@@ -112,7 +114,7 @@ Si el servidor confirma que existe una sesión, llama a:
 actualizarMenuSesion(resultado.user);
 ```
 
-Esta función se ejecuta al final de `main.js`:
+La llamada a esta función aparece al final de `main.js`, en la línea 119:
 
 ```js
 cargarSesion();
@@ -120,7 +122,7 @@ cargarSesion();
 
 ### `js/responsive.js`
 
-#### Evento `click` de `.menu-btn`
+#### Eventos `click` de `.menu-btn` — `js/responsive.js:1-7`
 
 Cuando se hace clic en el botón de tres líneas:
 
@@ -152,7 +154,7 @@ La función recibe:
 
 ### `api/login.js`
 
-#### Función principal `module.exports`
+#### Función principal `module.exports` — `api/login.js:6-95`
 
 Controla el inicio de sesión.
 
@@ -169,7 +171,7 @@ Hace lo siguiente:
 
 ### `api/register.js`
 
-#### Función principal `module.exports`
+#### Función principal `module.exports` — `api/register.js:5-161`
 
 Controla el registro de nuevos usuarios.
 
@@ -188,7 +190,7 @@ El registro público nunca puede elegir su propio rol de administrador.
 
 ### `api/me.js`
 
-#### Función principal `module.exports`
+#### Función principal `module.exports` — `api/me.js:4-49`
 
 Comprueba si existe una sesión activa.
 
@@ -203,7 +205,7 @@ Esta API es utilizada por `cargarSesion()`.
 
 ### `api/logout.js`
 
-#### Función principal `module.exports`
+#### Función principal `module.exports` — `api/logout.js:2-16`
 
 Cierra la sesión.
 
@@ -213,7 +215,7 @@ Esta API es utilizada por `cerrarSesion(boton)`.
 
 ### `api/test-db.js`
 
-#### Función principal `module.exports`
+#### Función principal `module.exports` — `api/test-db.js:4-22`
 
 Comprueba si el servidor puede conectarse a MySQL.
 
