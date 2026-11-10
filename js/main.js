@@ -62,8 +62,11 @@ function crearMenuSesion(usuario, enlace) {
         menu.hidden = !menu.hidden;
     });
 
+    const padre = enlace.parentElement;
+
+    padre.replaceChild(contenedor, enlace);
+
     contenedor.append(enlace, menu);
-    enlace.replaceWith(contenedor);
 
     document.addEventListener("click", (evento) => {
         if (!contenedor.contains(evento.target)) {
