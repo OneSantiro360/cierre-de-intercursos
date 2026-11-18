@@ -3,6 +3,7 @@ const db = require("../lib/db");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
+// Recibe las credenciales enviadas por js/login.js y crea la sesión.
 module.exports = async (req, res) => {
     if (req.method !== "POST") {
         return res.status(405).json({

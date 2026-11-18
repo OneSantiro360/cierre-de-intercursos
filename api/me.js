@@ -1,6 +1,8 @@
 
 const jwt = require("jsonwebtoken");
 
+// Comprueba la cookie creada por api/login.js y devuelve la sesión actual.
+// La usa js/main.js para mostrar el nombre del usuario en el menú.
 module.exports = async (req, res) => {
     if (req.method !== "GET") {
         return res.status(405).json({

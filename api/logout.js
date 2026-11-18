@@ -1,4 +1,5 @@
 
+// Recibe la solicitud del botón de js/main.js y elimina la cookie de sesión.
 module.exports = async (req, res) => {
     if (req.method !== "POST") {
         return res.status(405).json({
