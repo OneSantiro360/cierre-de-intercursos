@@ -2,6 +2,7 @@ const formulario = document.getElementById("registroForm");
 const mensaje = document.getElementById("mensaje");
 const boton = document.getElementById("btnRegistro");
 
+// Controla el formulario de registro y envía sus datos a api/register.js.
 formulario.addEventListener("submit", async (e) => {
 
     e.preventDefault();

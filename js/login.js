@@ -2,6 +2,7 @@ const formulario = document.getElementById("loginForm");
 const mensaje = document.getElementById("mensaje");
 const boton = document.getElementById("btnLogin");
 
+// Controla el formulario de inicio de sesión y envía sus datos a api/login.js.
 formulario.addEventListener("submit", async (e) => {
 
     e.preventDefault();

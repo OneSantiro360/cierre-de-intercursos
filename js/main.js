@@ -1,6 +1,7 @@
 const loginLinks = document.querySelectorAll('a[href="login.html"]');
 const mobileMenus = document.querySelectorAll(".nav-left");
 
+// Esta función crea el icono de usuario que reemplaza al enlace de inicio de sesión.
 function crearIconoSesion() {
     const icono = document.createElement("i");
 
@@ -11,6 +12,7 @@ function crearIconoSesion() {
 }
 
 async function cerrarSesion(boton) {
+    // Envía la solicitud de cierre de sesión a api/logout.js.
     boton.disabled = true;
     boton.textContent = "Cerrando sesión...";
 
@@ -33,6 +35,7 @@ async function cerrarSesion(boton) {
 }
 
 function crearMenuSesion(usuario, enlace) {
+    // Cambia el enlace de Login por el icono y el menú del usuario.
     const contenedor = document.createElement("li");
     contenedor.className = "session-container";
 
@@ -76,6 +79,7 @@ function crearMenuSesion(usuario, enlace) {
 }
 
 function actualizarMenuSesion(usuario) {
+    // Actualiza el menú de escritorio y agrega el nombre al menú móvil.
     loginLinks.forEach((enlace) => {
         crearMenuSesion(usuario, enlace);
     });
@@ -97,6 +101,7 @@ function actualizarMenuSesion(usuario) {
 }
 
 async function cargarSesion() {
+    // Consulta api/me.js para saber si existe una sesión activa.
     try {
         const respuesta = await fetch("/api/me", {
             credentials: "same-origin"

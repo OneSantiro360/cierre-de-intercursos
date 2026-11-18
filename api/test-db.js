@@ -1,6 +1,7 @@
 
 const db = require("../lib/db");
 
+// Prueba la conexión usada por los otros archivos de api.
 module.exports = async (req, res) => {
     try {
         const [result] = await db.query("SELECT 1 AS conexion");

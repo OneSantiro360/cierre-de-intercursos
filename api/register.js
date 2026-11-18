@@ -2,6 +2,7 @@
 const db = require("../lib/db");
 const bcrypt = require("bcryptjs");
 
+// Recibe los datos enviados por js/register.js y crea una cuenta autorizada.
 module.exports = async (req, res) => {
     if (req.method !== "POST") {
         return res.status(405).json({
