@@ -16,12 +16,16 @@ const esEntornoLocal =
 
 // Convierte una ruta pública a su archivo local solo durante el desarrollo.
 function obtenerUrl(ruta) {
+    // Conserva el fragmento "#seccion" al convertir una ruta pública en un archivo local.
+    const [rutaBase, fragmento] = ruta.split("#");
+
     // En Vercel se conservan las rutas públicas; las rewrites las traducen internamente.
     if (!esEntornoLocal) {
-        return ruta;
+        return rutaBase + (fragmento ? `#${fragmento}` : "");
     }
 
-    return rutasPublicas[ruta] || ruta;
+    const rutaLocal = rutasPublicas[rutaBase] || rutaBase;
+    return rutaLocal + (fragmento ? `#${fragmento}` : "");
 }
 
 // Expone la función de navegación para que los demás archivos JavaScript puedan usarla.

@@ -313,3 +313,19 @@ rewrites de `vercel.json`, `js/navigation.js` convierte las rutas públicas a
 archivos locales cuando detecta `localhost` o `127.0.0.1`. Así `/equipos`
 puede abrir `equipos.html` durante el desarrollo, mientras que Vercel mantiene
 la ruta pública limpia.
+
+## Buscador instantáneo
+
+`js/search.js` controla el campo de búsqueda de `html/search.html`.
+
+Al escribir una palabra se ejecuta el evento `input`, que filtra una lista
+interna de páginas, deportes y cursos sin recargar la página ni requerir Enter.
+
+Las coincidencias se crean como enlaces HTML mediante JavaScript. En Live
+Server `js/navigation.js` transforma sus rutas públicas a archivos locales.
+En Vercel las rutas públicas como `/equipos` siguen siendo resueltas por
+`vercel.json`.
+
+Las búsquedas deportivas incluyen fragmentos de sección. Por ejemplo,
+`Voleibol` usa `/tabla-de-juego#voleibol`. El navegador abre esa página y
+después coloca el desplazamiento sobre la sección cuyo `id` es `voleibol`.

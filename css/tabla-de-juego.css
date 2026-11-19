@@ -1,6 +1,7 @@
 section{
     /* height: 150px; */
     margin-bottom: 5mm;
+    scroll-margin-top: 175px;
 }
 h2{
     text-align: center;
@@ -28,6 +29,11 @@ thead{
 }
 tr:nth-child(even){
     background-color: #ddd;
+}
+@media (max-width: 550px){
+    section{
+        scroll-margin-top: 155px;
+    }
 }
 .sig{
     background-color: green;

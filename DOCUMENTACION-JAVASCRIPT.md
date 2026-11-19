@@ -504,3 +504,37 @@ archivos locales y no interpreta las rewrites de Vercel. En Vercel conserva
 
 Las rutas con barra final tambien se aceptan. Los usuarios ven las rutas
 publicas sin `/html` porque `rewrites` resuelve internamente la direccion real.
+
+## 9. Busqueda instantanea
+
+`js/search.js` controla el buscador de `html/search.html`.
+
+La pagina carga una lista de datos internos con paginas, deportes y cursos.
+Cada elemento contiene su titulo, una descripcion breve y su ruta publica.
+
+El proceso es:
+
+1. `document.getElementById("s")` obtiene el campo de texto.
+2. El evento `input` ejecuta `mostrarResultados()` con cada tecla escrita.
+3. `normalizarTexto()` convierte a minusculas y elimina acentos y espacios exteriores.
+4. `datosBusqueda.filter()` busca el texto dentro del titulo y la descripcion.
+5. `replaceChildren()` borra los resultados anteriores.
+6. Se crean enlaces con `document.createElement("a")` y se muestran sin recargar.
+7. Si no existen coincidencias, se muestra un mensaje sin resultados.
+
+No es necesario pulsar Enter. El buscador consulta los datos al escribir y
+actualiza la lista inmediatamente.
+
+Las categorias deportivas utilizan fragmentos de URL para bajar hasta su tabla
+correcta:
+
+```text
+/tabla-de-juego#futsal-femenino
+/tabla-de-juego#futsal-masculino
+/tabla-de-juego#voleibol
+/tabla-de-juego#tenis-de-mesa
+```
+
+Cada fragmento coincide con el atributo `id` de una seccion en
+`html/tabla-de-juego.html`. El navegador carga la pagina y conserva o adapta
+el fragmento, llevando el desplazamiento hasta la tabla correspondiente.
