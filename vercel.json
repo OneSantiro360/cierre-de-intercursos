@@ -1,16 +1,13 @@
 {
   "version": 2,
   "cleanUrls": true,
-  "rewrites": [
-    {
-      "source": "/",
-      "destination": "/html/index.html"
-    },
-    { "source": "/equipos", "destination": "/html/equipos.html" },
-    { "source": "/tabla-de-juego", "destination": "/html/tabla-de-juego.html" },
-    { "source": "/reglamento", "destination": "/html/reglamento.html" },
-    { "source": "/search", "destination": "/html/search.html" },
-    { "source": "/login", "destination": "/html/login.html" },
-    { "source": "/register", "destination": "/html/register.html" }
+  "routes": [
+    { "src": "^/$", "dest": "/html/index.html" },
+    { "src": "^/equipos/?$", "dest": "/html/equipos.html" },
+    { "src": "^/tabla-de-juego/?$", "dest": "/html/tabla-de-juego.html" },
+    { "src": "^/reglamento/?$", "dest": "/html/reglamento.html" },
+    { "src": "^/search/?$", "dest": "/html/search.html" },
+    { "src": "^/login/?$", "dest": "/html/login.html" },
+    { "src": "^/register/?$", "dest": "/html/register.html" }
   ]
 }
