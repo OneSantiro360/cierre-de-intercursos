@@ -1,8 +1,9 @@
+// Obtiene los elementos del formulario de registro y sus controles visuales.
 const formulario = document.getElementById("registroForm");
 const mensaje = document.getElementById("mensaje");
 const boton = document.getElementById("btnRegistro");
 
-// Controla el formulario de registro y envía sus datos a api/register.js.
+// Intercepta el registro; valida los datos y los envía al endpoint /api/register.
 formulario.addEventListener("submit", async (e) => {
 
     e.preventDefault();

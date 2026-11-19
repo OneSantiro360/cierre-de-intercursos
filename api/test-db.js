@@ -1,7 +1,10 @@
 
 const db = require("../lib/db");
 
-// Prueba la conexión usada por los otros archivos de api.
+/*
+ * Prueba la conexión usada por los otros archivos de api/.
+ * Ejecuta una consulta mínima y devuelve si MySQL respondió correctamente.
+ */
 module.exports = async (req, res) => {
     try {
         const [result] = await db.query("SELECT 1 AS conexion");

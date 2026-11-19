@@ -115,10 +115,10 @@ main{
 .nav-right a{
     display: block;
     margin-right: 5vh;
-    color: #B6816A;
+    color: #091f2a;
 }
 .nav-right .user-menu-name{
-    color: #ffd166;
+    color: #fff;
 }
 /*Menu responsive*/
 .menu-btn {
@@ -151,7 +151,7 @@ footer h3{
     position: relative;
 }
 .session-container > a i {
-    color: #ffd166;
+    color: #fff;
 }
 
 .session-dropdown {

@@ -2,8 +2,12 @@
 const db = require("../lib/db");
 const bcrypt = require("bcryptjs");
 
-// Recibe los datos enviados por js/register.js y crea una cuenta autorizada.
+/*
+ * Recibe los datos enviados por js/register.js y crea una cuenta autorizada.
+ * Un registro público nunca puede elegir su propio rol; siempre crea "user".
+ */
 module.exports = async (req, res) => {
+    // Solo permite enviar datos de registro mediante POST.
     if (req.method !== "POST") {
         return res.status(405).json({
             message: "Método no permitido"

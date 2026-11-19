@@ -22,7 +22,7 @@ Hace lo siguiente:
 4. Comprueba que se haya escrito una contraseña.
 5. Envía los datos a `/api/login`.
 6. Muestra un mensaje de éxito o de error.
-7. Si el inicio de sesión funciona, redirige a `html/index.html`.
+7. Si el inicio de sesión funciona, redirige a `/`.
 
 El evento no tiene un nombre propio porque está escrito directamente así:
 
@@ -46,7 +46,7 @@ Hace lo siguiente:
 4. Comprueba que exista la contraseña de autorización.
 5. Envía los datos a `/api/register`.
 6. Muestra un mensaje de éxito o de error.
-7. Si el registro funciona, redirige a `html/login.html`.
+7. Si el registro funciona, redirige a `/login`.
 
 ### `js/main.js`
 
@@ -71,7 +71,7 @@ Hace lo siguiente:
 1. Desactiva temporalmente el botón.
 2. Envía una solicitud `POST` a `/api/logout`.
 3. El servidor elimina la cookie de sesión.
-4. Redirige a `html/index.html`.
+4. Redirige a `/`.
 
 Si ocurre un error, vuelve a activar el botón y muestra el error en la consola.
 
@@ -254,7 +254,7 @@ POST /api/logout
     ↓
 Se elimina la cookie session
     ↓
-Regreso a html/index.html
+Regreso a /
 ```
 
 ## Archivos principales
@@ -272,3 +272,36 @@ Regreso a html/index.html
 | `api/me.js` | Consulta de sesión |
 | `api/logout.js` | Cierre de sesión |
 | `api/test-db.js` | Prueba de conexión con la base de datos |
+| `js/navigation.js` | Convierte rutas públicas en archivos locales durante Live Server |
+
+## Rutas públicas y archivos HTML
+
+Los enlaces usan rutas públicas como `/equipos` en lugar de
+`equipos.html` porque la dirección debe ser limpia y no debe mostrar la carpeta
+internamente organizada del proyecto. `equipos.html` sigue siendo el archivo
+real, pero se encuentra dentro de `html/equipos.html`.
+
+La diferencia es:
+
+```text
+/equipos       -> URL que ve el usuario
+html/equipos.html -> archivo físico entregado por el servidor
+```
+
+La configuración de `vercel.json` conecta ambas partes mediante una rewrite:
+
+```json
+{
+  "source": "/equipos",
+  "destination": "/html/equipos.html"
+}
+```
+
+Por ejemplo, el usuario abre `/equipos`, Vercel entrega internamente
+`html/equipos.html` y la barra de navegación conserva `/equipos`.
+
+El comportamiento es diferente en Live Server. Como Live Server no procesa las
+rewrites de `vercel.json`, `js/navigation.js` convierte las rutas públicas a
+archivos locales cuando detecta `localhost` o `127.0.0.1`. Así `/equipos`
+puede abrir `equipos.html` durante el desarrollo, mientras que Vercel mantiene
+la ruta pública limpia.

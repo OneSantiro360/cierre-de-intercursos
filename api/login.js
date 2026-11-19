@@ -1,10 +1,14 @@
 
+// Pool de conexiones compartido para consultar MySQL.
 const db = require("../lib/db");
+// Compara y verifica contraseñas almacenadas mediante hashes bcrypt.
 const bcrypt = require("bcryptjs");
+// Crea y verifica tokens JWT usados por la cookie de sesión.
 const jwt = require("jsonwebtoken");
 
 // Recibe las credenciales enviadas por js/login.js y crea la sesión.
 module.exports = async (req, res) => {
+    // Solo permite el envío de credenciales mediante POST.
     if (req.method !== "POST") {
         return res.status(405).json({
             message: "Método no permitido"
@@ -26,7 +30,7 @@ module.exports = async (req, res) => {
             });
         }
 
-        // Buscar usuario
+        // Busca al usuario por identificación y limita el resultado a una coincidencia.
         const [users] = await db.execute(
             "SELECT id, username, userid, `password`, role FROM `usuarios` WHERE userid = ? LIMIT 1",
             [userid.trim()]
@@ -40,7 +44,7 @@ module.exports = async (req, res) => {
 
         const user = users[0];
 
-        // Comparar contraseña
+        // Compara la contraseña escrita con el hash almacenado en MySQL.
         const validPassword = await bcrypt.compare(
             password,
             user.password
@@ -56,7 +60,7 @@ module.exports = async (req, res) => {
             throw new Error("JWT_SECRET no está configurado");
         }
 
-        // Crear token
+        // Crea un JWT con los datos básicos necesarios para identificar al usuario.
         const token = jwt.sign(
             {
                 sub: String(user.id),
@@ -71,7 +75,9 @@ module.exports = async (req, res) => {
             }
         );
 
-        // Guardar token en cookie segura
+        // Envía el JWT como cookie.
+        // HttpOnly protege el token de JavaScript; Secure exige HTTPS;
+        // SameSite=Lax controla su envío entre sitios y Max-Age define siete días.
         res.setHeader("Set-Cookie", [
             `session=${token}; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=604800`
         ]);

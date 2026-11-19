@@ -55,7 +55,7 @@ Funciones principales:
 7. En las lineas 48-52 interpreta los errores devueltos por la API; las lineas
    64-67 los muestran al usuario.
 8. En las lineas 55-62 muestra el exito, limpia el formulario y redirige a
-   `html/index.html`.
+   `/`.
 9. En las lineas 69-73 reactiva el boton, tanto si la solicitud tuvo exito como
    si fallo.
 
@@ -86,7 +86,7 @@ Funciones principales:
 6. En las lineas 55-59 interpreta los errores devueltos por la API y las lineas
    64-67 los muestran al usuario.
 7. En las lineas 61-71 muestra el exito, limpia el formulario y redirige a
-   `html/login.html`.
+   `/login`.
 8. En las lineas 73-77 reactiva el boton al terminar la solicitud.
 
 Conexion:
@@ -110,7 +110,7 @@ Funciones:
 
 - `crearIconoSesion()` (lineas 4-10): crea el icono visual del usuario.
 - `cerrarSesion(boton)` (lineas 13-31): envia `POST /api/logout`, desactiva
-  temporalmente el boton y redirige a `html/index.html`. La solicitud se realiza en
+  temporalmente el boton y redirige a `/`. La solicitud se realiza en
   las lineas 18-21, conectando este archivo con
   [`api/logout.js`](api/logout.js).
 - `crearMenuSesion(usuario, enlace)` (lineas 35-75): reemplaza el enlace de
@@ -403,7 +403,7 @@ html/login.html
  -> bcryptjs: compara la contraseña
  -> jsonwebtoken: crea el JWT
  -> cookie session
- -> html/index.html
+ -> /
 ```
 
 ### Registro
@@ -417,7 +417,7 @@ html/register.html
  -> MySQL: valida admin y usuario existente
  -> bcryptjs: hashea la nueva contraseña
  -> MySQL: inserta el usuario
- -> html/login.html
+ -> /login
 ```
 
 ### Consulta de sesion
@@ -439,7 +439,7 @@ Menu de usuario
  -> POST /api/logout
  -> api/logout.js
  -> elimina cookie session
- -> html/index.html
+ -> /
 ```
 
 ## 7. Observacion sobre `lib/db.js`
@@ -455,3 +455,44 @@ ambigua:
 
 - `lib/db.js`: solo pool MySQL.
 - `api/test-db.js`: solo prueba `SELECT 1 AS conexion`.
+
+## 8. Rutas publicas y configuracion de Vercel
+
+`vercel.json` contiene las reglas internas que conectan las rutas publicas con
+los archivos HTML almacenados dentro de `html/`.
+
+Se usa `/equipos` en vez de `equipos.html` para presentar una URL limpia al
+usuario y mantener separada la estructura interna de archivos. `equipos.html`
+es el nombre del archivo fisico guardado en `html/`; no representa una ruta que
+deba verse obligatoriamente en la barra del navegador. La forma tradicional
+`equipos.html` tambien podria funcionar localmente o mediante una ruta directa,
+pero mostraria la organizacion del proyecto y no daria una URL uniforme.
+
+Cuando alguien visita `/equipos`, Vercel recibe el dominio y aplica la
+`rewrites` definida en `vercel.json`. Esa regla entrega internamente
+`html/equipos.html` sin cambiar la URL visible a `/html/equipos.html`.
+
+Ejemplo del flujo:
+
+```text
+Enlace: /equipos
+  -> vercel.json
+  -> destino interno: html/equipos.html
+  -> navegador conserva: /equipos
+```
+
+El archivo `js/navigation.js` adapta los enlaces para Live Server. En localhost
+convierte `/equipos` a `equipos.html`, porque Live Server abre directamente los
+archivos locales y no interpreta las rewrites de Vercel. En Vercel conserva
+`/equipos`.
+
+- `/`: entrega `html/index.html`.
+- `/equipos`: entrega `html/equipos.html`.
+- `/tabla-de-juego`: entrega `html/tabla-de-juego.html`.
+- `/reglamento`: entrega `html/reglamento.html`.
+- `/search`: entrega `html/search.html`.
+- `/login`: entrega `html/login.html`.
+- `/register`: entrega `html/register.html`.
+
+Las rutas con barra final tambien se aceptan. Los usuarios ven las rutas
+publicas sin `/html` porque `rewrites` resuelve internamente la direccion real.

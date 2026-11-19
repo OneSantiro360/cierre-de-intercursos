@@ -1,8 +1,9 @@
+// Obtiene los elementos del formulario para leer datos, mostrar mensajes y controlar el botón.
 const formulario = document.getElementById("loginForm");
 const mensaje = document.getElementById("mensaje");
 const boton = document.getElementById("btnLogin");
 
-// Controla el formulario de inicio de sesión y envía sus datos a api/login.js.
+// Intercepta el envío; valida los campos y solicita al servidor iniciar la sesión.
 formulario.addEventListener("submit", async (e) => {
 
     e.preventDefault();
@@ -13,7 +14,7 @@ formulario.addEventListener("submit", async (e) => {
     mensaje.textContent = "";
     mensaje.style.color = "#ff7777";
 
-    // Validar identificación
+    // Valida que la identificación contenga únicamente números con una longitud permitida.
     if (!/^\d{1,20}$/.test(userid)) {
         mensaje.textContent = "Ingrese un número de identificación válido";
         return;
