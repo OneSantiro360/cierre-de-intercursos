@@ -16,6 +16,7 @@ const esEntornoLocal =
 
 // Convierte una ruta pública a su archivo local solo durante el desarrollo.
 function obtenerUrl(ruta) {
+    // En Vercel se conservan las rutas públicas; las rewrites las traducen internamente.
     if (!esEntornoLocal) {
         return ruta;
     }

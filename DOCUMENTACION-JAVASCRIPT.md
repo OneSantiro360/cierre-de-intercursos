@@ -75,7 +75,15 @@ Controla el formulario de registro de `html/register.html`.
 Funciones principales:
 
 1. En las lineas 1-3 obtiene el formulario, el mensaje y el boton de registro.
-2. En las lineas 5-14 lee todos los datos que seran enviados al servidor.
+2. En las lineas 11-24 lee los cinco datos escritos por el usuario:
+   `username` contiene el nombre y conserva el texto sin espacios exteriores;
+   `userid` contiene el numero de identificacion sin espacios exteriores;
+   `password` contiene la contraseña que se utilizara para ingresar;
+   `confirmPassword` contiene la repeticion de esa contraseña;
+   `adminPassword` contiene la clave privada de autorizacion. Esta clave no
+   identifica al nuevo usuario, sino que confirma que una persona autorizada
+   permite crear la cuenta. El servidor compara esta clave contra los hashes
+   existentes de usuarios con el rol `admin`.
 3. En las lineas 18-31 estan las validaciones del navegador: identificador
    numerico, confirmacion de contraseña y contraseña de autorizacion. Estos
    `if` muestran errores al usuario antes de contactar la API.

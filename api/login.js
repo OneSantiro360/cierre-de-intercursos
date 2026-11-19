@@ -16,8 +16,10 @@ module.exports = async (req, res) => {
     }
 
     try {
+        // req.body contiene el JSON convertido por el servidor desde el fetch del navegador.
         const { userid, password } = req.body || {};
 
+        // Valida tipos y formatos antes de consultar MySQL o comparar contraseñas.
         if (
             typeof userid !== "string" ||
             typeof password !== "string" ||
@@ -37,11 +39,13 @@ module.exports = async (req, res) => {
         );
 
         if (users.length === 0) {
+            // Se evita informar si el ID existe por separado para no facilitar el reconocimiento.
             return res.status(401).json({
                 message: "ID o contraseña incorrectos"
             });
         }
 
+        // users es una lista; esta constante extrae el único usuario esperado.
         const user = users[0];
 
         // Compara la contraseña escrita con el hash almacenado en MySQL.
@@ -51,12 +55,14 @@ module.exports = async (req, res) => {
         );
 
         if (!validPassword) {
+            // Usa el mismo mensaje que el caso de ID inexistente.
             return res.status(401).json({
                 message: "ID o contraseña incorrectos"
             });
         }
 
         if (!process.env.JWT_SECRET) {
+            // Sin clave privada no se debe crear una sesión firmada.
             throw new Error("JWT_SECRET no está configurado");
         }
 
@@ -93,6 +99,7 @@ module.exports = async (req, res) => {
         });
 
     } catch (error) {
+        // Oculta fallos internos de MySQL o JWT y devuelve un mensaje general.
         console.error("Error en login:", error);
 
         return res.status(500).json({

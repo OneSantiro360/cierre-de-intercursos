@@ -1,4 +1,5 @@
 
+// jwt permite verificar que el token enviado por el navegador sea auténtico y no haya expirado.
 const jwt = require("jsonwebtoken");
 
 // Comprueba la cookie creada por api/login.js y devuelve la sesión actual.

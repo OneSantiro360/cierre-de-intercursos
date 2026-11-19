@@ -40,7 +40,15 @@ Este código se ejecuta cuando se envía el formulario de registro.
 
 Hace lo siguiente:
 
-1. Lee el nombre, el número de identificación y las contraseñas.
+1. Lee cinco valores del formulario mediante `document.getElementById()`:
+   `username` es el nombre que se mostrara en la cuenta;
+   `userid` es el numero de identificacion que identifica al usuario;
+   `password` es la contraseña que se utilizara para iniciar sesion;
+   `confirmPassword` repite la contraseña para comprobar que se escribio igual;
+   `adminPassword` contiene la clave de autorizacion necesaria para registrar
+   la cuenta.
+   Las tres constantes que incluyen `.trim()` eliminan espacios al inicio y al
+   final sin modificar la contraseña principal.
 2. Comprueba que el número solo tenga dígitos.
 3. Comprueba que las dos contraseñas coincidan.
 4. Comprueba que exista la contraseña de autorización.

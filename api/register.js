@@ -1,5 +1,8 @@
 
+// db es el pool compartido utilizado para ejecutar las consultas MySQL.
 const db = require("../lib/db");
+
+// bcrypt permite comparar claves de administrador y generar el hash del usuario nuevo.
 const bcrypt = require("bcryptjs");
 
 /*
@@ -15,6 +18,7 @@ module.exports = async (req, res) => {
     }
 
     try {
+        // req.body contiene los cinco datos recibidos desde el formulario de registro.
         const {
             username,
             userid,
@@ -34,7 +38,10 @@ module.exports = async (req, res) => {
             });
         }
 
+        // cleanUsername conserva el nombre sin espacios exteriores.
         const cleanUsername = username.trim();
+
+        // cleanUserid guarda la identificación normalizada antes de consultar o insertarla.
         const cleanUserid = userid.trim();
 
         // Validar nombre
@@ -87,9 +94,12 @@ module.exports = async (req, res) => {
         }
 
         // Comprobar la contraseña introducida contra los hashes
+        // autorizado cambia a true únicamente si alguna clave coincide con un administrador.
         let autorizado = false;
 
         for (const admin of admins) {
+            // bcrypt compara la clave escrita con cada hash sin recuperar una contraseña real.
+            // coincide indica si la clave escrita corresponde al hash actual.
             const coincide = await bcrypt.compare(
                 adminPassword,
                 admin.password
@@ -148,6 +158,7 @@ module.exports = async (req, res) => {
         });
 
     } catch (error) {
+        // Consola registra el fallo técnico; el cliente recibe una respuesta adecuada.
         console.error(
             "Error en registro:",
             error.code || error.message
