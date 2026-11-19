@@ -1,4 +1,4 @@
-const loginLinks = document.querySelectorAll('a[href="login.html"]');
+const loginLinks = document.querySelectorAll('a[href="/login"], a[href="login.html"]');
 const mobileMenus = document.querySelectorAll(".nav-left");
 
 // Esta función crea el icono de usuario que reemplaza al enlace de inicio de sesión.
@@ -26,7 +26,7 @@ async function cerrarSesion(boton) {
             throw new Error("No se pudo cerrar la sesión");
         }
 
-        window.location.href = "/index.html";
+        window.location.href = window.appNavigation?.obtenerUrl("/") || "/";
     } catch (error) {
         console.error("Error al cerrar sesión:", error);
         boton.disabled = false;

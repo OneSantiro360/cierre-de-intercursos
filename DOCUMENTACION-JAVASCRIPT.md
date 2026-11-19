@@ -37,7 +37,7 @@ solicitudes de la API. `js/nada.js` actualmente esta vacio.
 
 ### 2.1 `js/login.js`
 
-Controla el formulario de inicio de sesion de `login.html`.
+Controla el formulario de inicio de sesion de `html/login.html`.
 
 Funciones principales:
 
@@ -55,14 +55,14 @@ Funciones principales:
 7. En las lineas 48-52 interpreta los errores devueltos por la API; las lineas
    64-67 los muestran al usuario.
 8. En las lineas 55-62 muestra el exito, limpia el formulario y redirige a
-   `index.html`.
+   `html/index.html`.
 9. En las lineas 69-73 reactiva el boton, tanto si la solicitud tuvo exito como
    si fallo.
 
 Conexion:
 
 ```text
-login.html
+html/login.html
     -> js/login.js
     -> POST /api/login
     -> api/login.js
@@ -70,7 +70,7 @@ login.html
 
 ### 2.2 `js/register.js`
 
-Controla el formulario de registro de `register.html`.
+Controla el formulario de registro de `html/register.html`.
 
 Funciones principales:
 
@@ -86,13 +86,13 @@ Funciones principales:
 6. En las lineas 55-59 interpreta los errores devueltos por la API y las lineas
    64-67 los muestran al usuario.
 7. En las lineas 61-71 muestra el exito, limpia el formulario y redirige a
-   `login.html`.
+   `html/login.html`.
 8. En las lineas 73-77 reactiva el boton al terminar la solicitud.
 
 Conexion:
 
 ```text
-register.html
+html/register.html
     -> js/register.js
     -> POST /api/register
     -> api/register.js
@@ -110,7 +110,7 @@ Funciones:
 
 - `crearIconoSesion()` (lineas 4-10): crea el icono visual del usuario.
 - `cerrarSesion(boton)` (lineas 13-31): envia `POST /api/logout`, desactiva
-  temporalmente el boton y redirige a `index.html`. La solicitud se realiza en
+  temporalmente el boton y redirige a `html/index.html`. La solicitud se realiza en
   las lineas 18-21, conectando este archivo con
   [`api/logout.js`](api/logout.js).
 - `crearMenuSesion(usuario, enlace)` (lineas 35-75): reemplaza el enlace de
@@ -123,8 +123,8 @@ Funciones:
   111-113. Esta es la conexion con [`api/me.js`](api/me.js).
 - La linea 119 inicia automaticamente la comprobacion al cargar la pagina.
 
-Este archivo se carga en las paginas principales, como `index.html`,
-`equipos.html`, `reglamento.html`, `search.html` y `tabla-de-juego.html`.
+Este archivo se carga en las paginas principales, como `html/index.html`,
+`html/equipos.html`, `html/reglamento.html`, `html/search.html` y `html/tabla-de-juego.html`.
 
 Conexiones:
 
@@ -394,7 +394,7 @@ api/test-db.js
 ### Inicio de sesion
 
 ```text
-login.html
+html/login.html
  -> js/login.js
  -> POST /api/login
  -> api/login.js
@@ -403,13 +403,13 @@ login.html
  -> bcryptjs: compara la contraseña
  -> jsonwebtoken: crea el JWT
  -> cookie session
- -> index.html
+ -> html/index.html
 ```
 
 ### Registro
 
 ```text
-register.html
+html/register.html
  -> js/register.js
  -> POST /api/register
  -> api/register.js
@@ -417,7 +417,7 @@ register.html
  -> MySQL: valida admin y usuario existente
  -> bcryptjs: hashea la nueva contraseña
  -> MySQL: inserta el usuario
- -> login.html
+ -> html/login.html
 ```
 
 ### Consulta de sesion
@@ -439,7 +439,7 @@ Menu de usuario
  -> POST /api/logout
  -> api/logout.js
  -> elimina cookie session
- -> index.html
+ -> html/index.html
 ```
 
 ## 7. Observacion sobre `lib/db.js`

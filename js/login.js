@@ -59,7 +59,7 @@ formulario.addEventListener("submit", async (e) => {
         formulario.reset();
 
         setTimeout(() => {
-            window.location.href = "/index.html";
+            window.location.href = window.appNavigation?.obtenerUrl("/") || "/";
         }, 800);
 
     } catch (error) {

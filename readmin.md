@@ -22,7 +22,7 @@ Hace lo siguiente:
 4. Comprueba que se haya escrito una contraseña.
 5. Envía los datos a `/api/login`.
 6. Muestra un mensaje de éxito o de error.
-7. Si el inicio de sesión funciona, redirige a `index.html`.
+7. Si el inicio de sesión funciona, redirige a `html/index.html`.
 
 El evento no tiene un nombre propio porque está escrito directamente así:
 
@@ -46,7 +46,7 @@ Hace lo siguiente:
 4. Comprueba que exista la contraseña de autorización.
 5. Envía los datos a `/api/register`.
 6. Muestra un mensaje de éxito o de error.
-7. Si el registro funciona, redirige a `login.html`.
+7. Si el registro funciona, redirige a `html/login.html`.
 
 ### `js/main.js`
 
@@ -71,7 +71,7 @@ Hace lo siguiente:
 1. Desactiva temporalmente el botón.
 2. Envía una solicitud `POST` a `/api/logout`.
 3. El servidor elimina la cookie de sesión.
-4. Redirige a `index.html`.
+4. Redirige a `html/index.html`.
 
 Si ocurre un error, vuelve a activar el botón y muestra el error en la consola.
 
@@ -226,7 +226,7 @@ Ejecuta una consulta sencilla y devuelve un mensaje indicando si la conexión fu
 El proceso completo funciona así:
 
 ```text
-login.html
+html/login.html
     ↓
 js/login.js
     ↓
@@ -254,15 +254,15 @@ POST /api/logout
     ↓
 Se elimina la cookie session
     ↓
-Regreso a index.html
+Regreso a html/index.html
 ```
 
 ## Archivos principales
 
 | Archivo | Función principal |
 |---|---|
-| `login.html` | Página de inicio de sesión |
-| `register.html` | Página de registro |
+| `html/login.html` | Página de inicio de sesión |
+| `html/register.html` | Página de registro |
 | `js/login.js` | Lógica del formulario de login |
 | `js/register.js` | Lógica del formulario de registro |
 | `js/main.js` | Sesión, usuario y cierre de sesión |

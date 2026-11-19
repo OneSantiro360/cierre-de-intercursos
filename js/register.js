@@ -67,7 +67,7 @@ formulario.addEventListener("submit", async (e) => {
         formulario.reset();
 
         setTimeout(() => {
-            window.location.href = "/login.html";
+            window.location.href = window.appNavigation?.obtenerUrl("/login") || "/login";
         }, 1200);
 
     } catch (error) {

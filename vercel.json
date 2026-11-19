@@ -1,4 +1,16 @@
 {
   "version": 2,
-  "cleanUrls": true
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/html/index.html"
+    },
+    { "source": "/equipos", "destination": "/html/equipos.html" },
+    { "source": "/tabla-de-juego", "destination": "/html/tabla-de-juego.html" },
+    { "source": "/reglamento", "destination": "/html/reglamento.html" },
+    { "source": "/search", "destination": "/html/search.html" },
+    { "source": "/login", "destination": "/html/login.html" },
+    { "source": "/register", "destination": "/html/register.html" }
+  ]
 }
